@@ -45,28 +45,7 @@ Node* NodeHandler::getNode(const unsigned id) const {
 }
 
 
-// NODES DELETERS //
-void NodeHandler::deleteNode(const int id) {
-    if (id >= nodes.size()) { throw std::invalid_argument("NodeHandler::deleteNode: id out of range"); }
-    if (nodes[id] == nullptr) { return; }
-
-    if (this->nodes[id]->getParent() != nullptr) {
-        this->nodes[id]->getParent()->removeChild(this->nodes[id]);
-    }
-
-    std::vector<Node*> children = this->getNode(id)->getChildren();
-    if (children.size() > 0) {
-        for (unsigned i = 0; i < children.size(); i++) {
-            if (children[i] != nullptr) {
-                this->deleteNode(children[i]->ID);
-            }
-        }
-    }
-
-    delete nodes[id];
-    nodes[id] = nullptr;
-}
-
+// NODES DELETER //
 void NodeHandler::deleteNode(Node* node) {
     if (node == nullptr) { return; }
 

@@ -10,9 +10,8 @@ public:
     const int ID;
 
     // CONSTRUCTOR & DESTRUCTOR //
-    Node();
     Node(const NODE_TYPE type, const std::string name, const int id);
-    Node(const Node& node);
+    Node(const Node* node, const unsigned id);
 
     ~Node();
 

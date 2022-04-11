@@ -2,7 +2,19 @@
 
 
 // CONSTRUCTOR & DESTRUCTOR //
-Node::Node(const NODE_TYPE type, const std::string name, const int id) : type(type), name(name), ID(id), parent(nullptr) {}
+Node::Node(const Node* node, const unsigned id) :
+    ID(id),
+    type(node->type),
+    name(node->name),
+    parent(node->parent)
+{}
+
+Node::Node(const NODE_TYPE type, const std::string name, const int id) :
+    type(type),
+    name(name),
+    ID(id),
+    parent(nullptr)
+{}
 
 Node::~Node() {
     std::cout << "\tNode(" << this->ID << ") : " << this->name << " destroyed" << std::endl;
