@@ -31,9 +31,21 @@ NodeHandler::~NodeHandler() {
 
 
 // PUBLIC METHODS //
-Node* NodeHandler::createNode(NODE_TYPE type, std::string name) {
+Node*& NodeHandler::createNode(NODE_TYPE type, std::string name) {
     std::string node_name = (name == "default_node") ? NODE_TYPE_STRING[type] : name;
-    nodes.push_back(new Node(type, node_name, nodes.size()));
+
+    switch (type) {
+        case NODE_TYPE::SPRITE:
+            nodes.push_back(new Sprite(type, node_name, nodes.size()));
+            break;
+        case NODE_TYPE::KINEMATIC_BODY:
+            nodes.push_back(new KinematicBody(type, node_name, nodes.size()));
+            break;
+        default:
+            nodes.push_back(new Node(type, node_name, nodes.size()));
+            break;
+    }
+
     return nodes[nodes.size() - 1];
 }
 

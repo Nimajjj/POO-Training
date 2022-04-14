@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "../src/debug/debug.h"
+#include "debug/debug.h"
 #include "abstract_type/abstract_type.h"
 #include "handler/node_handler.h"
 

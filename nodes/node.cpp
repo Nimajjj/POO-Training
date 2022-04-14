@@ -13,7 +13,8 @@ Node::Node(const NODE_TYPE type, const std::string name, const int id) :
     type(type),
     name(name),
     ID(id),
-    parent(nullptr)
+    parent(nullptr),
+    transform(Transform())
 {}
 
 Node::~Node() {

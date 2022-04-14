@@ -32,12 +32,10 @@ protected:
     std::string name;
     Node* parent;
     std::vector<Node*> children;
+    Transform transform;
 
     // PROTECTED METHODS //
     void setParent(Node* node);
     void removeParent();
-
-private:
-
 };
 
