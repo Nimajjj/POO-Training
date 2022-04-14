@@ -3,7 +3,7 @@
 std::map<NODE_TYPE, std::string> NODE_TYPE_STRING = {
         {NODE, "NODE"},
         {SPRITE, "SPRITE"},
-        {COLLISION_SHAPE, "COLLISION_SHAPE"},
+        {COLLISION_OBJECT, "COLLISION_OBJECT"},
         {KINEMATIC_BODY, "KINEMATIC_BODY"}
 };
 
@@ -40,6 +40,9 @@ Node*& NodeHandler::createNode(NODE_TYPE type, std::string name) {
             break;
         case NODE_TYPE::KINEMATIC_BODY:
             nodes.push_back(new KinematicBody(type, node_name, nodes.size()));
+            break;
+        case NODE_TYPE::COLLISION_OBJECT:
+            nodes.push_back(new CollisionShape(type, node_name, nodes.size()));
             break;
         default:
             nodes.push_back(new Node(type, node_name, nodes.size()));

@@ -27,7 +27,11 @@ std::vector<Node*> Node::getChildren() const {
     return this->children;
 }
 
-Node* Node::getParent() const {
+const Node* Node::getParent() const {
+    return this->parent;
+}
+
+Node*& Node::getParent() {
     return this->parent;
 }
 
@@ -38,18 +42,21 @@ std::string Node::getName() const {
 
 // SETTERS //
 void Node::addChild(Node* node) {
+    if (node == this) { throw std::runtime_error("Cannot add self as child"); }
     this->children.push_back(node);
     node->setParent(this);
 }
 
 void Node::setParent(Node* node) {
+    if (node == this) { throw std::runtime_error("Cannot add self as parent"); }
     this->removeParent();
     this->parent = node;
 }
 
 void Node::removeChild(Node* node) {
-    for (unsigned i = 0; i < children.size(); i++) {
+    for (unsigned i = 0; i < this->children.size(); i++) {
         if (this->children[i] == node) {
+            children[i]->removeParent();
             this->children[i] = nullptr;
             return;
         }
@@ -69,8 +76,13 @@ std::ostream& operator << (std::ostream& os, Node& node) {
     if (node.parent != nullptr) { os << ", parent: " << node.parent->ID; }
     else { os << ", parent: null"; }
     os << ", children: ";
-    if (node.children.size() > 0) {
-        for (auto& child : node.children) { os << child->ID << ", "; }
+    if (node.getChildren().size() > 0) {
+        os << "( ";
+        for (auto& child : node.getChildren()) {
+            if (child == nullptr) { continue; }
+            os << child->ID << " ";
+        }
+        os << ")";
     }
     else { os << "null"; }
     os << ")";

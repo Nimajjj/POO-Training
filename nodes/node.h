@@ -16,12 +16,15 @@ public:
     ~Node();
 
     // SETTERS //
-    void addChild(Node* node);
-    void removeChild(Node* node);
+    virtual void addChild(Node* node);
+    virtual void removeChild(Node* node);
+    void setParent(Node* node);
+    void removeParent();
 
     // GETTERS //
     std::vector<Node*> getChildren() const;
-    Node* getParent() const;
+    const Node* getParent() const;
+    Node*& getParent();
     std::string getName() const;
 
     // MISC OPERATORS //
@@ -33,9 +36,5 @@ protected:
     Node* parent;
     std::vector<Node*> children;
     Transform transform;
-
-    // PROTECTED METHODS //
-    void setParent(Node* node);
-    void removeParent();
 };
 
